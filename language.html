@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Details</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button id="back-button" onclick="goBack()">Back</button>
+    <h1 id="language-title"></h1>
+    <p id="language-description"></p>
+
+    <script>
+        const languages = {
+            "Spanish": {
+                title: "Spanish",
+                description: "Este es el mejor idioma bitch"
+            }
+        };
+
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        function loadLanguage() {
+            const language = getQueryParam("lang");
+            if (languages[language]) {
+                document.getElementById("language-title").innerText = languages[language].title;
+                document.getElementById("language-description").innerText = languages[language].description;
+            } else {
+                document.getElementById("language-title").innerText = "Language Not Found";
+                document.getElementById("language-description").innerText = "No details available.";
+            }
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        window.onload = loadLanguage;
+    </script>
+</body>
+</html>
