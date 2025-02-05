@@ -3,7 +3,7 @@
   padding: 0;
   font-family: 'Lucida Grande', sans-serif;
   -webkit-tap-highlight-color: transparent;
-  user-select: none; /* Prevent selecting ui text when dragging */
+  user-select: none;
 }
 
 html, body {
@@ -19,9 +19,7 @@ body {
   position: fixed;
   width: 100%;
 
-  padding-top: 70px;
-
-  /* Prevent browser from handling touch events */
+  padding-top: 40px;
   touch-action: none;
 
   display: flex;
@@ -39,17 +37,51 @@ body {
 }
 
 #title-container {
-  text-align: center; /* Center the title */
-  margin-bottom: 20px; /* Add spacing between the title and the wheel */
+  text-align: center; 
+  margin-bottom: 20px;
 }
 
 #title-text {
-  font-family: 'Arial', sans-serif; /* Choose a clear and readable font */
-  font-size: 24px; /* Adjust size for visibility */
-  font-weight: bold; /* Make the text stand out */
-  color: #333; /* Choose a color that contrasts well with the background */
-  margin: 0; /* Remove extra margins */
+  font-family: 'Arial', sans-serif; 
+  font-size: 24px;
+  font-weight: bold; 
+  color: #333;
+  margin: 0; 
 }
 
+#pop-up {
+  background-color: #da5485;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 250px;
+  height: 150px;
+  padding: 20px;
+  border: 2px solid black;
+  box-shadow: 5px 5px 2.5px #858585;
+}
 
+#pop-up-button {
+  background-color: #b93264;
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  width: 75px;
+  height: 50px;
+  border: 2px solid black;
+  box-shadow: 5px 5px 2.5px #858585;
+}
 
+#back-button {
+  background-color: #b93264;
+  margin-left: 50px;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 30px;
+  border: 2px solid black;
+  box-shadow: 5px 5px 2.5px #858585;
+}
