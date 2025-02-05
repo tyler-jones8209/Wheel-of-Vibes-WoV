@@ -13,7 +13,9 @@ const language_sector = {
   "Uralic": ["Finnish", "Hungarian", "Estonian", "Sami"],
   "Afroasiatic": ["Egyptian", "Somali"],
   "Austronesian": ["Tagalog", "Hawaiian", "Maori", "Malagasy", "Samoan"],
-  "Niger-Congo": ["Swahili", "Yoruba", "Igbo", "Zulu", "Shona"]
+  "Niger-Congo": ["Swahili", "Yoruba", "Igbo", "Zulu", "Shona"],
+  "Korean": ["Korean"],
+  "Japonic": ["Japanese"]
 };
 
 const adjustColor = (color, percent) => {
@@ -27,12 +29,13 @@ const adjustColor = (color, percent) => {
 
 const baseColor = "#fc5394";
 
-let level = 1; // 1 for the families wheel, 2 for the languages wheel
+let level = 1;
+let selectedLanguage = ""; 
 
 function renderWheel(input) {
   document.getElementById("wheel").innerHTML = "";
-  // 1. Configure the wheel's properties:
   const wheel_items = [];
+
   for (let x = 0; x < input.length; x++) {
     const step = -3;
     wheel_items.push({
@@ -40,6 +43,7 @@ function renderWheel(input) {
       backgroundColor: adjustColor(baseColor, step * x)
     });
   }
+
   const props = {
     items: wheel_items,
     overlayImage: "left_arrow_50px.webp",
@@ -57,29 +61,43 @@ function renderWheel(input) {
 
   let spinTimeout;
 
-  // Listen for index changes
   wheel.onCurrentIndexChange = () => {
     clearTimeout(spinTimeout);
-  
-    // Dynamically set the wait time based on the length of the second wheel
+    if (wheel.rotation < 0) {
+      wheel.pointerAngle = 0;
+    }
+
     const waitTime = level === 2 && wheel.items.length <= 4 ? 800 : 600;
-  
+
     spinTimeout = setTimeout(() => {
-      const currentIndex = wheel.getCurrentIndex(); // Get the final index
+      const currentIndex = wheel.getCurrentIndex();
       const currentItem = wheel.items[currentIndex];
-  
+
       if (level === 1) {
-        // If spinning the first wheel, create the second wheel
         console.log(`Wheel landed on: ${currentItem.label} with length of: ${language_sector[currentItem.label].length}`);
         level = 2;
         renderWheel(language_sector[currentItem.label]);
       } else if (level === 2) {
-        // Perform a custom action after the second wheel spin
         console.log(`The second wheel landed on: ${currentItem.label}`);
+
+        // Store selected language globally
+        selectedLanguage = currentItem.label;
+
+        // Show popup and button
+        document.getElementById("pop-up").style.display = "block";
+        document.getElementById("pop-up-text").innerText = `Congratulations! You got ${currentItem.label}!`;
+        document.getElementById("pop-up-button").style.display = "block";
       }
-    }, waitTime); // Use dynamically set wait time
+    }, waitTime);
   };
-}  
+}
+
+function goToLanguagePage() {
+  if (selectedLanguage) {
+    window.location.href = `language.html?lang=${encodeURIComponent(selectedLanguage)}`;
+  }
+}
 
 // Start with the families wheel
 renderWheel(families);
+
