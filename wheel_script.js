@@ -1,5 +1,5 @@
 const families = ['Romance', 'Germanic', 'Slavic', 'Indo-Aryan', 'Semitic', 'Turkic', 'Sino-Tibetan', 'Dravidian', 'Austroasiatic',
-  'Uralic', 'Afroasiatic', 'Austronesian', 'Niger-Congo', 'Japonic', 'Korean']; // Array of Language Families
+  'Uralic', 'Afroasiatic', 'Austronesian', 'Niger-Congo', 'Japonic', 'Korean']; 
 const language_sector = {
   "Romance": ["Spanish", "French", "Italian", "Portuguese", "Romanian"],
   "Germanic": ["German", "Dutch", "Swedish", "Norwegian", "Danish", "Afrikaans", "Icelandic"],
@@ -63,31 +63,45 @@ function renderWheel(input) {
 
   wheel.onCurrentIndexChange = () => {
     clearTimeout(spinTimeout);
-    if (wheel.rotation < 0) {
-      wheel.pointerAngle = 0;
-    }
 
-    const waitTime = level === 2 && wheel.items.length <= 4 ? 800 : 600;
+    const waitTime = level === 2 && wheel.items.length <= 4 ? 1000 : 600;
 
     spinTimeout = setTimeout(() => {
-      const currentIndex = wheel.getCurrentIndex();
-      const currentItem = wheel.items[currentIndex];
 
-      if (level === 1) {
-        console.log(`Wheel landed on: ${currentItem.label} with length of: ${language_sector[currentItem.label].length}`);
-        level = 2;
-        renderWheel(language_sector[currentItem.label]);
-      } else if (level === 2) {
-        console.log(`The second wheel landed on: ${currentItem.label}`);
+      let currentItem = wheel.items[wheel.getCurrentIndex()];
 
-        // Store selected language globally
-        selectedLanguage = currentItem.label;
+      if (wheel.rotation < -360) {
+        let totalItems = wheel.items.length;
+        let rawIndex = wheel.getCurrentIndex();
 
-        // Show popup and button
-        document.getElementById("pop-up").style.display = "block";
-        document.getElementById("pop-up-text").innerText = `Congratulations! You got ${currentItem.label}!`;
-        document.getElementById("pop-up-button").style.display = "block";
+        let adjustedIndex = (rawIndex + Math.round((totalItems * 90) / 360)) % totalItems;
+
+        currentItem = wheel.items[adjustedIndex];
       }
+
+      const checkIfStopped = () => {
+        if (wheel.rotationSpeed === 0) {
+          clearInterval(stopCheckInterval);  
+          
+          // Process the current item
+          if (level === 1) {
+            console.log(`Wheel landed on: ${currentItem.label} with length of: ${language_sector[currentItem.label].length}`);
+            level = 2;
+            renderWheel(language_sector[currentItem.label]);
+          } else if (level === 2) {
+            console.log(`The second wheel landed on: ${currentItem.label}`);
+
+            selectedLanguage = currentItem.label;
+
+            document.getElementById("pop-up").style.display = "block";
+            document.getElementById("pop-up-text").innerText = `Congratulations! You got ${currentItem.label}!`;
+            document.getElementById("pop-up-button").style.display = "block";
+          }
+        }
+      };
+
+      const stopCheckInterval = setInterval(checkIfStopped, 100);
+
     }, waitTime);
   };
 }
@@ -98,6 +112,5 @@ function goToLanguagePage() {
   }
 }
 
-// Start with the families wheel
 renderWheel(families);
 
