@@ -15,7 +15,8 @@
         const languages = {
             "Spanish": {
                 title: "Spanish",
-                description: "Este es el mejor idioma bitch"
+                description: "Spanish, one of my all-time favorite languages (that I'm totally fluent in), is one of the most spoken languages in the world. Around 600 million speakers worldwide. It's also the second most spoken language in the United States.\n Some of my favorite songs include:\n-- BIPOLAR - Peso Pluma, Junior H\n-- El Dueño De Tu Amor - DannyLux\n-- Primera Cita - Carin Leon\n-- Queiro Verte Hoy - Benjamín Walker, Vanessa Zamora\n-- Lo Que Hay X Aquí - La Receta\n-- Pistoleros Famosos - Los Cadetes De Linares",
+                link: "https://open.spotify.com/playlist/0Fl4E08m6JrmIa4lLdokcG?si=dfb47866e5dd4e0d"
             }
         };
 
@@ -29,6 +30,7 @@
             if (languages[language]) {
                 document.getElementById("language-title").innerText = languages[language].title;
                 document.getElementById("language-description").innerText = languages[language].description;
+                document.getElementById("playlist-button").dataset.link = languages[language].link;
             } else {
                 document.getElementById("language-title").innerText = "Language Not Found";
                 document.getElementById("language-description").innerText = "No details available.";
@@ -39,7 +41,20 @@
             window.history.back();
         }
 
+        function loadPlaylist() {
+            const playlist_link = document.getElementById("playlist-button").dataset.link;
+            if (playlist_link) {
+                window.open(playlist_link, "_blank");
+            } else {
+                alert("No playlist available.");
+            }
+}
+
+        the_link = languages[getQueryParam("lang")].link
+
         window.onload = loadLanguage;
     </script>
+    <button id="playlist-button" onclick="loadPlaylist(the_link)">Music Here</button>
+
 </body>
 </html>
