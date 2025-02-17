@@ -1,5 +1,5 @@
 const families = ['Romance', 'Germanic', 'Slavic', 'Indo-Aryan', 'Semitic', 'Turkic', 'Sino-Tibetan', 'Dravidian', 'Austroasiatic',
-  'Uralic', 'Afroasiatic', 'Austronesian', 'Niger-Congo', 'Japonic', 'Korean']; 
+  'Uralic', 'Afroasiatic', 'Austronesian', 'Niger-Congo', 'Korean', 'Japonic']; 
 const language_sector = {
   "Romance": ["Spanish", "French", "Italian", "Portuguese", "Romanian"],
   "Germanic": ["German", "Dutch", "Swedish", "Norwegian", "Danish", "Afrikaans", "Icelandic"],
@@ -15,7 +15,7 @@ const language_sector = {
   "Austronesian": ["Tagalog", "Hawaiian", "Maori", "Malagasy", "Samoan"],
   "Niger-Congo": ["Swahili", "Yoruba", "Igbo", "Zulu", "Shona"],
   "Korean": ["Korean"],
-  "Japonic": ["Japanese"]
+  "Japonic": ["Japanese", "Ryukyuan", "Ainu"],
 };
 
 const adjustColor = (color, percent) => {
@@ -31,6 +31,7 @@ const baseColor = "#fc5394";
 
 let level = 1;
 let selectedLanguage = ""; 
+var wheel = null;
 
 function renderWheel(input) {
   document.getElementById("wheel").innerHTML = "";
@@ -53,7 +54,7 @@ function renderWheel(input) {
     itemLabelFontSizeMax: 15,
     borderWidth: 2.5,
     lineWidth: 0.1,
-    imageOpacity: 0.5
+    //imageOpacity: 0.5
   };
 
   const container = document.getElementById("wheel");
@@ -66,6 +67,8 @@ function renderWheel(input) {
 
     const waitTime = level === 2 && wheel.items.length <= 4 ? 1000 : 600;
 
+    console.log(wheel.rotation)
+
     spinTimeout = setTimeout(() => {
 
       let currentItem = wheel.items[wheel.getCurrentIndex()];
@@ -77,6 +80,9 @@ function renderWheel(input) {
         let adjustedIndex = (rawIndex + Math.round((totalItems * 90) / 360)) % totalItems;
 
         currentItem = wheel.items[adjustedIndex];
+
+        console.log(`Raw index: ${rawIndex}, Adjusted index: ${adjustedIndex}, Current index: ${wheel.getCurrentIndex()}`);
+
       }
 
       const checkIfStopped = () => {
