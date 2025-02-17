@@ -10,15 +10,85 @@
     <button id="back-button" onclick="goBack()">Back</button>
     <h1 id="language-title"></h1>
     <p id="language-description"></p>
+    <button id="playlist-button" onclick="loadPlaylist()">Music Here</button>
 
     <script>
         const languages = {
             "Spanish": {
-                title: "Spanish",
-                description: "Spanish, one of my all-time favorite languages (that I'm totally fluent in), is one of the most spoken languages in the world. Around 600 million speakers worldwide. It's also the second most spoken language in the United States.\n Some of my favorite songs include:\n-- BIPOLAR - Peso Pluma, Junior H\n-- El Dueño De Tu Amor - DannyLux\n-- Primera Cita - Carin Leon\n-- Queiro Verte Hoy - Benjamín Walker, Vanessa Zamora\n-- Lo Que Hay X Aquí - La Receta\n-- Pistoleros Famosos - Los Cadetes De Linares",
+                title: "Spanish - Español",
+                description: `
+                    <strong>Spanish</strong>, one of my all-time favorite languages 
+                    (that I'm <i>totally fluent</i> in), is one of the most spoken languages in the world. 
+                    There are around <strong>600 million speakers</strong> worldwide. 
+                    It's also the second most spoken language in the United States.
+
+                    <br><br><strong>Some of my favorite songs are:</strong>
+                    <ul>
+                        <li><strong>BIPOLAR</strong> - Peso Pluma, Junior H</li>
+                        <li><strong>El Dueño De Tu Amor</strong> - DannyLux</li>
+                        <li><strong>Primera Cita</strong> - Carin Leon</li>
+                        <li><strong>Queiro Verte Hoy</strong> - Benjamín Walker, Vanessa Zamora</li>
+                        <li><strong>Lo Que Hay X Aquí</strong> - La Receta</li>
+                        <li><strong>Pistoleros Famosos</strong> - Los Cadetes De Linares</li>
+                    </ul>
+                `,
                 link: "https://open.spotify.com/playlist/0Fl4E08m6JrmIa4lLdokcG?si=dfb47866e5dd4e0d"
-            }
+            },
+            "Italian": {
+                title: "Italian - Italiano",
+                description: `
+                    <strong>Italian</strong>, a language with over <strong>30 regional dialects</strong>, is spoken in many countries including Italy, San Marino, Vatican City, Switzerland, and more. 
+                    There are around <strong>80 million speakers</strong> worldwide. 
+                    It's also the second most spoken language in the United States.
+
+                    <br><br><strong>Some of my favorite songs are:</strong>
+                    <ul>
+                        <li><strong>Il Meno Possibile</strong> - Marco Mengoni, Gazzelle</li>
+                        <li><strong>Waves of Luv</strong> - 2 Black</li>
+                        <li><strong>Nebbia</strong> - Infuso</li>
+                    </ul>
+                `,
+                link: "https://open.spotify.com/playlist/4oa4GAvMPwt9dCZPpeqMjp?si=ecefb0106b384d98"
+            },
+            "Vietnamese": {
+                title: "Vietnamese - Tiếng Việt",
+                description: `
+                    <strong>Vietnamese</strong> is mainly spoken in Vietnam, but is also spoken by the Gin, a group of Vietnamese descendants living in the Jing Islands of the Guanxi Zhuang region of China. 
+                    Unlike many of its surrounding neighbors, Vietnamese uses a modified Latin alphabet. Dropping F, J, W, and Z and adding new tonal variations. 
+                    There are around <strong>85 million speakers</strong> worldwide.
+                    <br><br><strong>Some of my favorite songs are:</strong>
+                    <ul>
+                        <li><strong>Cơn Đau</strong> - WREN EVANS</li>
+                        <li><strong>người điên</strong> - tlinh</li>
+                        <li><strong>dịu dàng</strong> - Bluemato</li>
+                        <li><strong>Giấc Mơ Từng Mơ</strong> - Solar Eclipse</li>
+                    </ul>
+                `,
+                link: "https://open.spotify.com/playlist/3aJhCQRi4X7mhy4aAuQ60s?si=9cc3fe423a3e43db"
+            },
+            "Japanese": {
+                title: "Japanese - 日本語",
+                description: `
+                    <strong>Japanese</strong>, my all-time favorite language 
+                    (that I'm <i>totally fluent</i> in), is spoken in Japan. It uses three different scripts: Kanji (漢字), derived from Chinese characters; 
+                    Hiragana (ひらがな), used for grammatical elements, native Japanese words, and Kanji pronounciation; Katakana (カタカナ), used for foreign words and names.
+                    There are around <strong>128 million speakers</strong> worldwide. 大学で1年間、日本語を勉強した。日本の音楽が大好きだ。
+
+                    <br><br><strong>Some of my favorite songs are:</strong>
+                    <ul>
+                        <li><strong>YABA (やば。)</strong> - Fujii Kaze (藤井風)</li>
+                        <li><strong>MUKANJYO</strong> - Survive Said The Prophet</li>
+                        <li><strong>Hakujitsu (白日)</strong> - King Gnu</li>
+                        <li><strong>Odoriko (踊り子)</strong> - Vaundy</li>
+                        <li><strong>Backlight (逆光)</strong> - Ado</li>
+                        <li><strong>Single Focus (単焦点)</strong> - Penthouse</li>
+                    </ul>
+                `,
+                link: "https://open.spotify.com/playlist/5UPbIqV0yAiYi9dhNKGhcl?si=afa64364c999482e"
+            },
         };
+
+
 
         function getQueryParam(param) {
             const urlParams = new URLSearchParams(window.location.search);
@@ -29,7 +99,7 @@
             const language = getQueryParam("lang");
             if (languages[language]) {
                 document.getElementById("language-title").innerText = languages[language].title;
-                document.getElementById("language-description").innerText = languages[language].description;
+                document.getElementById("language-description").innerHTML = languages[language].description; // Use innerHTML for formatting
                 document.getElementById("playlist-button").dataset.link = languages[language].link;
             } else {
                 document.getElementById("language-title").innerText = "Language Not Found";
@@ -38,8 +108,14 @@
         }
 
         function goBack() {
-            window.history.back();
+            console.log("Called")
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                window.location.href = 'index.html'; 
+            }
         }
+
 
         function loadPlaylist() {
             const playlist_link = document.getElementById("playlist-button").dataset.link;
@@ -48,13 +124,9 @@
             } else {
                 alert("No playlist available.");
             }
-}
-
-        the_link = languages[getQueryParam("lang")].link
+        }
 
         window.onload = loadLanguage;
     </script>
-    <button id="playlist-button" onclick="loadPlaylist(the_link)">Music Here</button>
-
 </body>
 </html>
