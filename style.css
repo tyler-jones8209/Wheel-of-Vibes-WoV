@@ -5,21 +5,19 @@
   user-select: none;
 }
 
-html, body {
+html {
   height: 100%;
   background-color: rgb(182, 148, 157);
+  overflow-y: auto; /* or overflow-y: auto; */
+  overflow-x: hidden;
+  height: auto;
+  min-height: 100vh;
 }
 
 body {
-  /* Prevent pull-down-to-refresh gesture */
-  overscroll-behavior-y: contain;
-
-  /* Prevent iOS rubber-band effect */
-  position: fixed;
+  position: absolute;
   width: 100%;
-
-  touch-action: none;
-
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-items: stretch;
@@ -186,9 +184,61 @@ body {
 }
 
 .random-text {
-  position: absolute;
+  position: absolute; /* Ensures positioning relative to <body> */
   font-family: Arial, sans-serif;
   opacity: 0.3;
   user-select: none;
   z-index: -1;
+  white-space: nowrap; /* Prevents multi-line wrapping */
+}
+
+.collapsible-container {
+  margin-top: 1%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
+  height: auto;
+}
+
+.collapsible {
+  background-color: #bb105a;
+  color: black;
+  cursor: pointer;
+  position: relative;
+  padding: 10px;
+  width: 10%;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.active, .collapsible:hover {
+  background-color: #830d0d;
+}
+
+.content {
+  font-family: 'Arial', sans-serif;
+  display: none;
+  padding: 0 15px;
+  overflow: hidden;
+  background-color: #850202;
+  border-left: 2px solid #ccc;
+}
+
+.content ul {
+  list-style-type: none; /* Removes the bullet points */
+  padding-left: 0; /* Removes default left padding */
+}
+
+.content li {
+  margin-bottom: 10px; /* Optional: adds space between list items */
+}
+
+.content a {
+  text-decoration: none;
+  color: #9da1ff; /* Example color */
 }
