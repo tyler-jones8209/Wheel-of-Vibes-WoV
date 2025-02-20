@@ -7,7 +7,8 @@ const language_sector = {
   "Indo-Aryan": ["Hindi", "Bengali", "Punjabi", "Marathi", "Gujarati", "Sinhala", "Urdu", "Nepali"],
   "Semitic": ["Arabic", "Hebrew", "Amharic", "Tigrinya", "Amaric"],
   "Turkic": ["Turkish", "Uzbek", "Kasakh", "Azerbaijani", "Turkmen"],
-  "Sino-Tibetan": ["Mandarin", "Cantonese", "Tibetan", "Burmese", "Hakka"],
+  "Sino-Tibetan": ["Mandarin", "Cantonese", "Tibetan", "Burmese", "Hakka", "Taiwanese Hokkien"],
+  "Kra-Dai": ["Thai", "Lao"],
   "Dravidian": ["Tamil", "Telugu", "Kannada", "Malayalam"],
   "Austroasiatic": ["Vietnamese", "Khmer", "Mon"],
   "Uralic": ["Finnish", "Hungarian", "Estonian", "Sami"],
@@ -100,7 +101,7 @@ function renderWheel(input) {
             selectedLanguage = currentItem.label;
 
             document.getElementById("pop-up").style.display = "block";
-            document.getElementById("pop-up-text").innerText = `Congratulations! You got ${currentItem.label}!`;
+            document.getElementById("pop-up-text").innerHTML = `Congratulations! You got <strong>${currentItem.label}</strong>!`;
             document.getElementById("pop-up-button").style.display = "block";
           }
         }
