@@ -83,12 +83,14 @@ body {
 
 #pop-up {
   background-color: #da5485;
+  text-align: center;
+  font-family: 'Arial', sans-serif; 
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 250px;
-  height: 150px;
+  width: 225px;
+  height: 100px;
   padding: 20px;
   border: 2px solid black;
   box-shadow: 5px 5px 2.5px #858585;
@@ -96,8 +98,9 @@ body {
 
 #pop-up-button {
   background-color: #b93264;
+  font-family: 'Arial', sans-serif; 
   position: absolute;
-  top: 55%;
+  top: 67%;
   left: 50%;
   text-align: center;
   transform: translate(-50%, -50%);
@@ -172,7 +175,7 @@ body {
 
 #playlist-button {
   align-self: center;
-  margin-top: 80px;
+  margin-top: 40px;
   background-color: #e02677;
   text-align: center;
   font-size: 20px;
