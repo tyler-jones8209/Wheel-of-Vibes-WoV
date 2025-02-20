@@ -2,19 +2,32 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>WoV: Acknowledgments</title>
+        <title>Acknowledgments</title>
         <meta charset="UTF-8" />
         <link rel="stylesheet" href="style.css" />
     </head>
 
+    <div id="title-container">
+        <h1 id="title-text">Acknowledgments</h1>
+    </div>
+
     <body>
-        <h2>Music Contributors:</h2>
-        <p>
+        <button id="back-button" onclick="goBack()">Back</button>
+
+        <p id="language-description">
+            <strong>Thank you to everyone who shared their music with me!</strong><br>
             Elsa Garry<br>
             Saki Takizawa<br>
             Lê Bùi Gia Nghi<br>
             Koki Inaba
         </p>
     </body>
+
+    <script>
+        function goBack() {
+            window.location.href = 'index.html'
+        }
+    </script>
+    <script src="design-text.js"></script>
 
 </html>
