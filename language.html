@@ -210,6 +210,21 @@
                 `,
                 link: "https://open.spotify.com/playlist/3nQWqiLtbNbtuEd9Kx6lun?si=6873dfceec2a4427"
             },
+            "Polish": {
+                title: "Polish - Polsku",
+                description: `
+                    <strong>Polish</strong>, the second most spoken Slavic language, 
+                    is spoken in Poland and many other surrounding countries. 
+                    Polish uses the latin alphabet with 7 additional letters including Ą, Ć, Ę, Ł, Ń, Ó, Ś, Ż, and Ź.
+                    There are around <strong>40 million speakers</strong> worldwide. 
+
+                    <br><br><strong>Some of my favorite songs are:</strong>
+                    <ul>
+                        <li><strong>TBD</strong> - TBD</li>
+                    </ul>
+                `,
+                link: "https://open.spotify.com/playlist/6QxUpyUQ8Sv86mSUmWKmdd?si=ae7336d946b54632"
+            },
             "Czech": {
                 title: "Czech - Česky",
                 description: `
@@ -223,6 +238,21 @@
                     </ul>
                 `,
                 link: "https://open.spotify.com/playlist/5zINtOT4GSOXlgkNYBl4Tt?si=30e074ea58424035"
+            },
+            "Slovak": {
+                title: "Slovak - Slovensky",
+                description: `
+                    <strong>Slovak</strong>, a language mutually intelligible with Czech, 
+                    is spoken in Slovakia, the Czech Republic, Hungary, Serbia, and more. 
+                    Slovak uses the latin alphabet with 20 additional characters. Lots and lots of diacritics. 
+                    There are around <strong>5 million speakers</strong> worldwide. 
+
+                    <br><br><strong>Some of my favorite songs are:</strong>
+                    <ul>
+                        <li><strong>TBD</strong> - TBD</li>
+                    </ul>
+                `,
+                link: "https://open.spotify.com/playlist/6QxUpyUQ8Sv86mSUmWKmdd?si=ae7336d946b54632"
             },
             "Turkmen": {
                 title: "Turkmen - Türkmen Dili",
@@ -314,7 +344,7 @@
                 document.getElementById("language-description").innerHTML = languages[language].description; // Use innerHTML for formatting
                 document.getElementById("playlist-button").dataset.link = languages[language].link;
             } else {
-                document.getElementById("language-title").innerText = "Language Not Found";
+                document.getElementById("language-title").innerText = "Coming Soon!";
                 document.getElementById("language-description").innerText = "No details available.";
             }
         }
